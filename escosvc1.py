@@ -70,7 +70,7 @@ for linea in lineas:
     
     resultados.append({
         'Descripción': reclamo,
-        'Código AIS predicho': clase_predicha
+        'Código Reclamo ': clase_predicha
     })
 
 resultados_df = pd.DataFrame(resultados)
