@@ -10,7 +10,7 @@ nltk.download('stopwords')
 nltk.download('punkt')
 
 # Leer el archivo CSV
-df = pd.read_csv('C:/Users/Hernán Ifrán/Downloads/RECLAMOS1.csv',encoding='latin-1') 
+df = pd.read_csv('C:/Users/Josvaldes/Documents/Maestria/Austral/2ano/textMining/proyecto/TextMining/RECLAMOS1.csv',encoding='latin-1') 
 df.dropna(subset=['problema_id', 'obsitem'], inplace=True)
 # Obteniene las columnas donde se concatena varios campos junto con la observacion y el identificador unico del problema
 Oitems = df['Concaobsitem'].tolist()
@@ -27,7 +27,7 @@ def stem_descripcion(descripcion):
 descripciones_stemmed = [stem_descripcion(desc) for desc in Oitems]
 
 # Leer el problemas nuevo desde el archivo CSV
-Reclamo_csv = 'C:/Users/Hernán Ifrán/Downloads/testesco.xlsx'  
+Reclamo_csv = 'C:/Users/Josvaldes/Documents/Maestria/Austral/2ano/textMining/proyecto/TextMining/testesco.xlsx'  
 df_Reclamo = pd.read_excel(Reclamo_csv)
 
 # Obtener la columna de observacion item  del DataFrame
@@ -64,7 +64,7 @@ for problema_nuevo in problemas_nuevos:
 resultado_df = pd.DataFrame(resultados, columns=['problema_id', 'problema_n'])
 
 # Guardar el DataFrame en un archivo CSV
-resultado_csv = ('C:/Users/Hernán Ifrán/Downloads/testresultado.csv')
+resultado_csv = ('C:/Users/Josvaldes/Documents/Maestria/Austral/2ano/textMining/proyecto/TextMining/testresultado.csv')
 resultado_df.to_csv(resultado_csv, index=False,encoding='latin-1')
 
 print('Resultados guardados en:', resultado_csv)
