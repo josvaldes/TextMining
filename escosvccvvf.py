@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.svm import SVC
 from sklearn.preprocessing import LabelEncoder
@@ -46,6 +46,9 @@ pipeline = Pipeline([
 
 # Entrenamiento del modelo
 pipeline.fit(X_train, y_train)
+scores = cross_val_score(pipeline, X_train, y_train, cv=5)  
+
+print("Accuracy en validación cruzada:", scores.mean())
 
 # Evaluación del modelo en el conjunto de prueba
 y_pred = pipeline.predict(X_test)
@@ -53,8 +56,7 @@ report = classification_report(y_test, y_pred, labels=np.unique(etiquetas_numeri
 print(report)
 
 # Cargar descripciones de problemas para evaluar
-archivo_evaluacion = 'C:/Users/Hernán Ifrán/Downloads/testesco.txt'  # Cambia la ruta al archivo de evaluación
-
+archivo_evaluacion = 'C:/Users/Hernán Ifrán/Downloads/testesco.txt'  
 with open(archivo_evaluacion, 'r', encoding='utf-8') as file:
     lineas = file.readlines()
 
