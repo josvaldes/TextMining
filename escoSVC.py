@@ -15,7 +15,7 @@ nltk.download('punkt')
 
 # Leer el archivo CSV
 
-df = pd.read_csv('C:/Users/Hernán Ifrán/Downloads/RECLAMOS3.csv', encoding='latin-1') 
+df = pd.read_csv('C:/Users/Josvaldes/Documents/Maestria/Austral/2ano/textMining/proyecto/TextMining/TextMining/RECLAMOS 3.csv', encoding='latin-1') 
 # Obtener las columnas de diagnósticos y códigos AIS
 Oitems = df['Concaobsitem'].tolist()
 ids = df['problema_id'].tolist()
@@ -62,7 +62,7 @@ class_names_dict = {class_num: class_name for class_num, class_name in zip(uniqu
 print(classification_report(y_test, y_pred, labels=unique_classes, target_names=class_names_dict.values(), zero_division=1))
 
 # Ejemplo de predicción para diagnósticos nuevos
-archivo_diagnosticos_csv = 'C:/Users/Hernán Ifrán/Downloads/testesco.xlsx'  # Cambia la ruta al archivo CSV
+archivo_diagnosticos_csv = 'C:/Users/Josvaldes/Documents/Maestria/Austral/2ano/textMining/proyecto/TextMining/TextMining/testesco.xlsx'  # Cambia la ruta al archivo CSV
 df_diagnosticos = pd.read_excel(archivo_diagnosticos_csv)
 
 # Filtrar las clases que existen en el conjunto de entrenamiento
@@ -87,7 +87,7 @@ for diagnostico in df_diagnosticos_filtrados['obsitem']:
 
 resultados_df = pd.DataFrame(resultados)
 
-resultados_csv = 'C:/Users/Hernán Ifrán/Downloads/testresultado.csv'
+resultados_csv = 'C:/Users/Josvaldes/Documents/Maestria/Austral/2ano/textMining/proyecto/TextMining/TextMining/testresultadoSVC.csv'
 resultados_df.to_csv(resultados_csv, index=False, encoding='latin-1')
 
 print("Resultados guardados en:", resultados_csv)
