@@ -8,13 +8,29 @@ from nltk.stem import SnowballStemmer
 from nltk.corpus import stopwords
 nltk.download('stopwords')
 nltk.download('punkt')
+import os
 
-# Leer el archivo CSV
-df = pd.read_csv('C:/Users/Hernán Ifrán/Downloads/RECLAMOS1.csv',encoding='latin-1') 
-df.dropna(subset=['problema_id', 'obsitem'], inplace=True)
+# Ruta base
+ruta_base = 'C:/Users/Josvaldes/Documents/Maestria/Austral/2ano/textMining/proyecto/TextMining/TextMining/'
+
+# Nombres de archivos
+excelInicial = 'RECLAMOS3.xlsx'
+
+# Construir rutas completas
+ruta_completaArchivoInicialExcel = os.path.join(ruta_base, excelInicial)
+
+# Carga el archivo Excel en un DataFrame 
+df = pd.read_excel(ruta_completaArchivoInicialExcel)
+
+# Guarda el DataFrame en formato CSV con delimitador de comas y encoding 'latin-1'
+df.to_csv('archivo_csv.csv', index=False, sep=',', encoding='cp1252')
+
+
+# Se elimina las filas vacias de los comparos problema_n y obsitem
+df.dropna(subset=['problema_n', 'obsitem'], inplace=True)
 # Obteniene las columnas donde se concatena varios campos junto con la observacion y el identificador unico del problema
 Oitems = df['Concaobsitem'].tolist()
-ids = df['problema_id'].tolist()
+ids = df['problema_n'].tolist()
 
 # Función para realizar stemming en una descripción
 stemmer = SnowballStemmer('spanish')
@@ -27,7 +43,7 @@ def stem_descripcion(descripcion):
 descripciones_stemmed = [stem_descripcion(desc) for desc in Oitems]
 
 # Leer el problemas nuevo desde el archivo CSV
-Reclamo_csv = 'C:/Users/Hernán Ifrán/Downloads/testesco.xlsx'  
+Reclamo_csv = 'C:/Users/Josvaldes/Documents/Maestria/Austral/2ano/textMining/proyecto/TextMining/TextMining/testesco.xlsx'  
 df_Reclamo = pd.read_excel(Reclamo_csv)
 
 # Obtener la columna de observacion item  del DataFrame
@@ -61,10 +77,10 @@ for problema_nuevo in problemas_nuevos:
     resultados.append((most_similar_codigo_AIS, problema_nuevo.strip()))
 
 # Crear un DataFrame a partir de los resultados
-resultado_df = pd.DataFrame(resultados, columns=['problema_id', 'problema_n'])
+resultado_df = pd.DataFrame(resultados, columns=['problema_n','Concaobsitem'])
 
 # Guardar el DataFrame en un archivo CSV
-resultado_csv = ('C:/Users/Hernán Ifrán/Downloads/testresultado.csv')
+resultado_csv = ('C:/Users/Josvaldes/Documents/Maestria/Austral/2ano/textMining/proyecto/TextMining/TextMining/testresultado2.csv')
 resultado_df.to_csv(resultado_csv, index=False,encoding='latin-1')
 
 print('Resultados guardados en:', resultado_csv)
